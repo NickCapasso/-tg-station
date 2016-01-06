@@ -803,7 +803,8 @@ var/global/list/synth_flesh_disguises = list()
 	w_class = 4
 	throw_speed = 2
 	throw_range = 7
-	force = 15
+	throwforce = 30
+	force = 12
 	var/charges = 5 //potentially throw smaller fireballs for a while then maybe toss the "gun" itself for an explosive fireball?
 	var/obj/item/weapon/gun/impfire/counterpart = null //set this to the other fireball and vice versa on creation. fireball won't be usable without a counterpart.
 
