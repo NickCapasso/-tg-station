@@ -153,7 +153,7 @@
 			if(do_after(src, 30, target = L))
 				visible_message("<span class='warning'>[src] swallows [target] whole!</span>")
 				L.loc = src
-				adjustHealth(-50)
+				adjustBruteLoss(-50)
 			return
 	else if(istype(target,/obj/item)) // Eat items just to be annoying
 		var/obj/item/I = target
