@@ -817,6 +817,19 @@ var/global/list/synth_flesh_disguises = list()
 	var/charges = 5 //potentially throw smaller fireballs for a while then maybe toss the "gun" itself for an explosive fireball?
 	var/obj/item/weapon/gun/impfire/counterpart = null //set this to the other fireball and vice versa on creation. fireball won't be usable without a counterpart.
 
+/obj/item/weapon/gun/impfire/suicide_act(mob/user)
+	var/mob/living/carbon/human/H = user
+	user.visible_message("<span class='suicide'>[user] is swallowing the [src.name]! It looks like \he's trying to commit suicide!</span>")
+	playsound(loc, 'sound/effects/blobattack.ogg', 10, 1, -3)
+	if (H && !qdeleted(H))
+		for(var/obj/item/W in H)
+			H.unEquip(W)
+			if(prob(50))
+				step(W, pick(alldirs))
+		gibs(H.loc, H.viruses, H.dna)
+	qdel(user)
+	return (FIRELOSS|BRUTELOSS)
+
 /obj/item/weapon/gun/impfire/examine(mob/user)
 	..()
 	if(charges > 1)
