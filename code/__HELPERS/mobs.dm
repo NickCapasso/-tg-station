@@ -53,16 +53,8 @@
 
 	//randomized imps
 
-	if(!shoulder_spikes_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/shoulder_spikes, shoulder_spikes_list)
-	if(!arm_spikes_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/arm_spikes, arm_spikes_list)
-	if(!elbow_spikes_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/elbow_spikes, elbow_spikes_list)
-	if(!knee_spikes_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/knee_spikes, knee_spikes_list)
-	if(!chest_spikes_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/chest_spikes, chest_spikes_list)
+	if(!spikes_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/spikes, spikes_list)
 	if(!claws_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/claws, claws_list)
 	if(!talons_list.len)
@@ -72,7 +64,7 @@
 
 
 	//For now we will always return none for tail_human and ears.
-	return(list("mcolor" = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"), "tail_lizard" = pick(tails_list_lizard), "tail_human" = "None", "snout" = pick(snouts_list), "horns" = pick(horns_list), "ears" = "None", "frills" = pick(frills_list), "spines" = pick(spines_list), "body_markings" = pick(body_markings_list)))
+	return(list("mcolor" = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"), "tail_lizard" = pick(tails_list_lizard), "tail_human" = "None", "snout" = pick(snouts_list), "horns" = pick(horns_list), "ears" = "None", "frills" = pick(frills_list), "spines" = pick(spines_list), "body_markings" = pick(body_markings_list), "spikes" = pick(spikes_list), "claws" = pick(claws_list), "talons" = pick(talons_list), "sigils" = pick(sigils_list)))
 
 /proc/random_hair_style(gender)
 	switch(gender)

@@ -345,6 +345,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["frills"] 	= sanitize_inlist(features["frills"], frills_list)
 	features["spines"] 	= sanitize_inlist(features["spines"], spines_list)
 	features["body_markings"] 	= sanitize_inlist(features["body_markings"], body_markings_list)
+	features["spikes"] 	= sanitize_inlist(features["spikes"], spikes_list)
+	features["claws"] 	= sanitize_inlist(features["claws"], claws_list)
+	features["talons"] 	= sanitize_inlist(features["talons"], talons_list)
+	features["sigils"] 	= sanitize_inlist(features["sigils"], sigils_list)
 
 	userandomjob	= sanitize_integer(userandomjob, 0, 1, initial(userandomjob))
 	job_civilian_high = sanitize_integer(job_civilian_high, 0, 65535, initial(job_civilian_high))

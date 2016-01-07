@@ -278,6 +278,7 @@ ROUNDSTART_RACES plasmaman
 #ROUNDSTART_RACES zombie
 #ROUNDSTART_RACES slime
 #ROUNDSTART_RACES pod
+ROUNDSTART_RACES imp
 ##-------------------------------------------------------------------------------------------
 
 ## Uncomment to give players the choice of joining as a human with mutant bodyparts before they join the game
@@ -290,7 +291,7 @@ ASSISTANT_CAP -1
 STARLIGHT
 
 ## Uncomment to bring back old grey suit assistants instead of the now default rainbow colored assistants.
-#GREY_ASSISTANTS
+GREY_ASSISTANTS
 
 ### Midround Antag (aka Mulligan antag) config options ###
 

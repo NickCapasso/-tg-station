@@ -386,16 +386,8 @@
 
 				//DEMON SHIT
 
-				if("shoulder_spikes")
-					S = shoulder_spikes_list[H.dna.features["shoulder_spikes"]]
-				if("arm_spikes")
-					S = arm_spikes_list[H.dna.features["arm_spikes"]]
-				if("elbow_spikes")
-					S = elbow_spikes_list[H.dna.features["elbow_spikes"]]
-				if("knee_spikes")
-					S = knee_spikes_list[H.dna.features["knee_spikes"]]
-				if("chest_spikes")
-					S = chest_spikes_list[H.dna.features["chest_spikes"]]
+				if("spikes")
+					S = spikes_list[H.dna.features["spikes"]]
 				if("talons")
 					S = talons_list[H.dna.features["talons"]]
 				if("claws")
