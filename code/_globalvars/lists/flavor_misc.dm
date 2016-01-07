@@ -28,13 +28,22 @@ var/global/list/ears_list = list()
 var/global/list/frills_list = list()
 var/global/list/spines_list = list()
 var/global/list/animated_spines_list = list()
+	//Demon parts
+var/global/list/shoulder_spikes_list = list()
+var/global/list/arm_spikes_list = list()
+var/global/list/elbow_spikes_list = list()
+var/global/list/knee_spikes_list = list()
+var/global/list/chest_spikes_list = list()
+var/global/list/talons_list = list()
+var/global/list/claws_list = list()
+var/global/list/sigils_list = list()
 	//Backpacks
 var/global/list/backbaglist = list("Backpack", "Satchel")
 	//Female Uniforms
 var/global/list/female_clothing_icons = list()
 
 	//radical shit
-var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+var/list/hit_appends = list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF", "-CUCK")
 
 var/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons/Taser.ogg','sound/weapons/armbomb.ogg','sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg','sound/voice/hiss5.ogg','sound/voice/hiss6.ogg','sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg','sound/items/Welder.ogg','sound/items/Welder2.ogg','sound/machines/airlock.ogg','sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
 

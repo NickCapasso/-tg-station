@@ -51,6 +51,26 @@
 	if(!body_markings_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/body_markings, body_markings_list)
 
+	//randomized imps
+
+	if(!shoulder_spikes_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/shoulder_spikes, shoulder_spikes_list)
+	if(!arm_spikes_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/arm_spikes, arm_spikes_list)
+	if(!elbow_spikes_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/elbow_spikes, elbow_spikes_list)
+	if(!knee_spikes_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/knee_spikes, knee_spikes_list)
+	if(!chest_spikes_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/chest_spikes, chest_spikes_list)
+	if(!claws_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/claws, claws_list)
+	if(!talons_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/talons, talons_list)
+	if(!sigils_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/sigils, sigils_list)
+
+
 	//For now we will always return none for tail_human and ears.
 	return(list("mcolor" = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"), "tail_lizard" = pick(tails_list_lizard), "tail_human" = "None", "snout" = pick(snouts_list), "horns" = pick(horns_list), "ears" = "None", "frills" = pick(frills_list), "spines" = pick(spines_list), "body_markings" = pick(body_markings_list)))
 
@@ -148,10 +168,10 @@ Proc for attack log creation, because really why not
 	if(!user || !target)
 		return 0
 	var/user_loc = user.loc
-	
+
 	var/drifting = 0
 	if(!user.Process_Spacemove(0) && user.inertia_dir)
-		drifting = 1 
+		drifting = 1
 
 	var/target_loc = target.loc
 
@@ -172,11 +192,11 @@ Proc for attack log creation, because really why not
 			break
 		if(uninterruptible)
 			continue
-		
+
 		if(drifting && !user.inertia_dir)
 			drifting = 0
 			user_loc = user.loc
-		
+
 		if((!drifting && user.loc != user_loc) || target.loc != target_loc || user.get_active_hand() != holding || user.incapacitated() || user.lying )
 			. = 0
 			break
@@ -192,11 +212,11 @@ Proc for attack log creation, because really why not
 		Tloc = target.loc
 
 	var/atom/Uloc = user.loc
-	
+
 	var/drifting = 0
 	if(!user.Process_Spacemove(0) && user.inertia_dir)
-		drifting = 1 
-		
+		drifting = 1
+
 	var/holding = user.get_active_hand()
 
 	var/holdingnull = 1 //User's hand started out empty, check for an empty hand
@@ -214,11 +234,11 @@ Proc for attack log creation, because really why not
 		sleep(1)
 		if (progress)
 			progbar.update(world.time - starttime)
-		
+
 		if(drifting && !user.inertia_dir)
 			drifting = 0
 			Uloc = user.loc
-				
+
 		if(!user || user.stat || user.weakened || user.stunned  || (!drifting && user.loc != Uloc))
 			. = 0
 			break

@@ -739,26 +739,35 @@ var/global/list/synth_flesh_disguises = list()
 	sexes = 0
 	blacklisted = 1
 	punchmod = 8
+	armor = 10
+	need_nutrition = 0
+	default_color = "734523"
+	mutant_bodyparts = list("shoulder_spikes", "arm_spikes", "elbow_spikes", "chest_spikes", "knee_spikes", "claws", "talons", "horns", "sigils")
+	default_features = list("mcolor" = "734523", "claws" = "None", "horns" = "None", "sigils" = "None")
+	attack_verb = "slash"
+	attack_sound = 'sound/weapons/slash.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
 	meat = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human
-	specflags = list(NOBREATH,HEATRES,COLDRES,NOBLOOD,RADIMMUNE,VIRUSIMMUNE)
+	specflags = list(MUTCOLORS,EYECOLOR,NOBREATH,HEATRES,RADIMMUNE,VIRUSIMMUNE)
+	var/title = list("Baronet"=1,"Baron"=2,"Viscount"=3,"Count"=4,"Marquess"=5,"Duke"=6,"Archduke"=7)
 
-	proc/assign_demon_name(mob/living/carbon/human/H)
-		H.real_name = pick(list("Bael","Agares","Marbas","Pruflas","Amon","Barbatos","Buer","Gusoin","Botis","Abigor","Leraie","Valefor","Morax","Ipos","Naberius","Glasya Labolas","Zepar","Beleth","Belial","Astaroth"))
-		H.name = H.real_name
-		H.voice_name = H.real_name
+/datum/species/imp/proc/assign_demon_name(mob/living/carbon/human/H)
+	H.real_name = pick(list("Bael","Agares","Marbas","Pruflas","Amon","Buer","Gusoin","Botis","Abigor","Leraie","Valefor","Morax","Ipos","Naberius","Glasya Labolas","Zepar","Beleth","Belial","Astaroth"))
+	H.name = "[title] + [H.real_name]"
+	H.voice_name = H.name
 
-	admin_set_species(mob/living/carbon/human/H, old_species)
-		H.hair_style = null			//basically removing hair and underclothes, and making sure eyes are red
-		H.facial_hair_style = null
-		H.eye_color = "f00"
-		H.undershirt = null
-		H.underwear = null
-		H.socks = null
-		H.update_body() //update body and hair just in case
-		H.update_hair()
-		var/datum/action/innate/conjure_fireball/fireball = new
-		fireball.Grant(H)
-		..()
+/datum/species/imp/admin_set_species(mob/living/carbon/human/H, old_species)
+	H.hair_style = null			//basically removing hair and underclothes, and making sure eyes are red
+	H.facial_hair_style = null
+	H.eye_color = "f00"
+	H.undershirt = null
+	H.underwear = null
+	H.socks = null
+	H.update_body() //update body and hair just in case
+	H.update_hair()
+	var/datum/action/innate/conjure_fireball/fireball = new
+	fireball.Grant(H)
+	..()
 
 /datum/action/innate/conjure_fireball
 	name = "Conjure Fireballs"
@@ -792,7 +801,7 @@ var/global/list/synth_flesh_disguises = list()
 
 	on_hit(atom/target, blocked = 0, hit_zone)
 		..()
-		explosion(target.loc, 0,0,1,1,1,0,2,0)
+		explosion(target, 0,0,1,1,1,0,2,0)
 
 /obj/item/weapon/gun/impfire
 	name = "Demonic Fire"
@@ -808,33 +817,33 @@ var/global/list/synth_flesh_disguises = list()
 	var/charges = 5 //potentially throw smaller fireballs for a while then maybe toss the "gun" itself for an explosive fireball?
 	var/obj/item/weapon/gun/impfire/counterpart = null //set this to the other fireball and vice versa on creation. fireball won't be usable without a counterpart.
 
-	examine(mob/user)
-		..()
-		if(charges > 1)
-			user << "[charges] fireball chargess remaining."
-		if(charges == 1)
-			user << "[charges] fireball charge remaining."
+/obj/item/weapon/gun/impfire/examine(mob/user)
+	..()
+	if(charges > 1)
+		user << "[charges] fireball chargess remaining."
+	if(charges == 1)
+		user << "[charges] fireball charge remaining."
 
-	afterattack(atom/target as mob|obj|turf, mob/living/carbon/human/user as mob|obj, flag, params)
-		if(!counterpart)
-			return 0
-		shoot_fireball(target, user)
-		if(charges==0)
-			qdel(src)
-			qdel(counterpart)
+/obj/item/weapon/gun/impfire/afterattack(atom/target as mob|obj|turf, mob/living/carbon/human/user as mob|obj, flag, params)
+	if(!counterpart)
+		return 0
+	shoot_fireball(target, user)
+	if(charges==0)
+		qdel(src)
+		qdel(counterpart)
 
-	proc/shoot_fireball(atom/target as mob|obj|turf, mob/living/user as mob|obj, message = 1, params, zone_override)
-		user.visible_message("<span class='danger'>[user] shoots a demonic fireball! [src.charges] charge(s) remaining.</span>", \
-						"<span class='danger'>You shoot a demonic fireball!</span>")
-		var/obj/item/projectile/impfireball/F = new /obj/item/projectile/impfireball(user.loc)
-		F.loc = user.loc
-		F.original = target
-		F.starting = user.loc
-		F.yo = target.y-user.loc.y
-		F.xo = target.x-user.loc.x
-		F.fire()
-		//message_admins("[key_name_admin(user)] shot a fireball.") //probably not necessary
-		log_game("[key_name(user)] shot a fireball.")
-		playsound(user.loc, 'sound/weapons/impfireball.ogg', 75, 1, -3)
-		charges--
-		counterpart:charges--
+/obj/item/weapon/gun/impfire/proc/shoot_fireball(atom/target as mob|obj|turf, mob/living/user as mob|obj, message = 1, params, zone_override)
+	user.visible_message("<span class='danger'>[user] shoots a demonic fireball!</span>", \
+					"<span class='danger'>You shoot a demonic fireball! [src.charges] charge(s) remaining.</span>")
+	var/obj/item/projectile/impfireball/F = new /obj/item/projectile/impfireball(user.loc)
+	F.loc = user.loc
+	F.original = target
+	F.starting = user.loc
+	F.yo = target.y-user.loc.y
+	F.xo = target.x-user.loc.x
+	F.fire()
+	//message_admins("[key_name_admin(user)] shot a fireball.") //probably not necessary
+	log_game("[key_name(user)] shot a fireball.")
+	playsound(user.loc, 'sound/weapons/impfireball.ogg', 75, 1, -3)
+	charges--
+	counterpart:charges--

@@ -1334,3 +1334,82 @@
 /datum/sprite_accessory/spines_animated/aqautic
 	name = "Aquatic"
 	icon_state = "aqua"
+
+
+///DEMON SHIT
+
+/datum/sprite_accessory/shoulder_spikes
+	icon = 'icons/mob/mutant_bodyparts.dmi'
+
+/datum/sprite_accessory/shoulder_spikes/left
+	name = "Left Shoulder Spike"
+	icon_state = "left"
+
+/datum/sprite_accessory/shoulder_spikes/right
+	name = "Left Shoulder Spike"
+	icon_state = "right"
+
+/datum/sprite_accessory/arm_spikes
+	icon = 'icons/mob/mutant_bodyparts.dmi'
+
+/datum/sprite_accessory/arm_spikes/left
+	name = "Left Arm Spike"
+	icon_state = "left"
+
+/datum/sprite_accessory/arm_spikes/right
+	name = "Right Arm Spike"
+	icon_state = "right"
+
+/datum/sprite_accessory/elbow_spikes
+	icon = 'icons/mob/mutant_bodyparts.dmi'
+
+/datum/sprite_accessory/elbow_spikes/left
+	name = "Left Elbow Spike"
+	icon_state = "left"
+
+/datum/sprite_accessory/elbow_spikes/right
+	name = "Right Elbow Spike"
+	icon_state = "right"
+
+/datum/sprite_accessory/knee_spikes
+	icon = 'icons/mob/mutant_bodyparts.dmi'
+
+/datum/sprite_accessory/knee_spikes/left
+	name = "Left Knee Spike"
+	icon_state = "left"
+
+/datum/sprite_accessory/knee_spikes/right
+	name = "Right Knee Spike"
+	icon_state = "right"
+
+/datum/sprite_accessory/chest_spikes
+	icon = 'icons/mob/mutant_bodyparts.dmi'
+
+/datum/sprite_accessory/chest_spikes/left
+	name = "Left Chest Spike"
+	icon_state = "left"
+
+/datum/sprite_accessory/chest_spikes/right
+	name = "Right Chest Spike"
+	icon_state = "right"
+
+/datum/sprite_accessory/claws
+	icon = 'icons/mob/mutant_bodyparts.dmi'
+
+/datum/sprite_accessory/claws
+	name = "Short Claws"
+	icon_state = "claws"
+
+/datum/sprite_accessory/talons
+	icon = 'icons/mob/mutant_bodyparts.dmi'
+
+/datum/sprite_accessory/talons
+	name = "Talons"
+	icon_state = "small"
+
+/datum/sprite_accessory/sigils
+	icon = 'icons/mob/mutant_bodyparts.dmi'
+
+/datum/sprite_accessory/sigils
+	name = "Sigils"
+	icon_state = "penta"
