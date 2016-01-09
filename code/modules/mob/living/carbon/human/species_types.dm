@@ -743,7 +743,7 @@ var/global/list/synth_flesh_disguises = list()
 	need_nutrition = 0
 	default_color = "734523"
 	mutant_bodyparts = list("spikes", "claws", "talons", "horns", "sigils")
-	default_features = list("mcolor" = "734523", "claws" = "None", "horns" = "None", "sigils" = "None", "spikes" = "standard")
+	default_features = list("mcolor" = "734523", "claws" = "None", "horns" = "None", "sigils" = "None", "spikes" = "Standard Spikes")
 	attack_verb = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'

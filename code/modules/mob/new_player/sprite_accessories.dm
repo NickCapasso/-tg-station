@@ -1341,9 +1341,17 @@
 /datum/sprite_accessory/spikes
 	icon = 'icons/mob/mutant_bodyparts.dmi'
 
+/datum/sprite_accessory/spikes/none
+	name = "None"
+	icon_state = "none"
+
 /datum/sprite_accessory/spikes/standard
-	name = "Standard Issue Demonic Spikes"
+	name = "Standard Spikes"
 	icon_state = "standard"
+
+/datum/sprite_accessory/spikes/ancient
+	name = "Ancient Spikes."
+	icon_state = "ancient"
 
 /datum/sprite_accessory/claws
 	icon = 'icons/mob/mutant_bodyparts.dmi'

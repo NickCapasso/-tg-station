@@ -299,6 +299,43 @@ var/list/preferences_datums = list()
 
 					dat += "</td>"
 
+			//demon shit
+				if("spikes" in pref_species.mutant_bodyparts)
+					dat += "<td valign='top' width='7%'>"
+
+					dat += "<h3>Spikes</h3>"
+
+					dat += "<a href='?_src_=prefs;preference=spikes;task=input'>[features["spikes"]]</a><BR>"
+
+					dat += "</td>"
+
+				if("claws" in pref_species.mutant_bodyparts)
+					dat += "<td valign='top' width='7%'>"
+
+					dat += "<h3>Claws</h3>"
+
+					dat += "<a href='?_src_=prefs;preference=claws;task=input'>[features["claws"]]</a><BR>"
+
+					dat += "</td>"
+
+				if("talons" in pref_species.mutant_bodyparts)
+					dat += "<td valign='top' width='7%'>"
+
+					dat += "<h3>Talons</h3>"
+
+					dat += "<a href='?_src_=prefs;preference=talons;task=input'>[features["talons"]]</a><BR>"
+
+					dat += "</td>"
+
+				if("sigils" in pref_species.mutant_bodyparts)
+					dat += "<td valign='top' width='7%'>"
+
+					dat += "<h3>Sigils</h3>"
+
+					dat += "<a href='?_src_=prefs;preference=sigils;task=input'>[features["sigils"]]</a><BR>"
+
+					dat += "</td>"
+
 			if(config.mutant_humans)
 
 				if("tail_human" in pref_species.mutant_bodyparts)
