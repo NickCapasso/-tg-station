@@ -726,3 +726,138 @@ var/global/list/synth_flesh_disguises = list()
 			return ..()
 	else
 		return ..()
+
+
+///////////////////////
+///		DEMONS		///
+///////////////////////
+
+/datum/species/imp
+	name = "Imp"
+	id = "imp"
+	say_mod = "growls"
+	sexes = 0
+	blacklisted = 1
+	punchmod = 8
+	armor = 10
+	need_nutrition = 0
+	default_color = "734523"
+	mutant_bodyparts = list("spikes", "claws", "talons", "horns", "sigils")
+	default_features = list("mcolor" = "734523", "claws" = "None", "horns" = "None", "sigils" = "None", "spikes" = "Standard Spikes")
+	attack_verb = "slash"
+	attack_sound = 'sound/weapons/slash.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	meat = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human
+	specflags = list(MUTCOLORS,EYECOLOR,NOBREATH,HEATRES,RADIMMUNE,VIRUSIMMUNE)
+	var/title = list("Baronet"=1,"Baron"=2,"Viscount"=3,"Count"=4,"Marquess"=5,"Duke"=6,"Archduke"=7)
+
+/datum/species/imp/proc/assign_demon_name(mob/living/carbon/human/H)
+	H.real_name = pick(list("Bael","Agares","Marbas","Pruflas","Amon","Buer","Gusoin","Botis","Abigor","Leraie","Valefor","Morax","Ipos","Naberius","Glasya Labolas","Zepar","Beleth","Belial","Astaroth"))
+	H.name = "[title] + [H.real_name]"
+	H.voice_name = H.name
+
+/datum/species/imp/admin_set_species(mob/living/carbon/human/H, old_species)
+	H.hair_style = null			//basically removing hair and underclothes, and making sure eyes are red
+	H.facial_hair_style = null
+	H.eye_color = "f00"
+	H.undershirt = null
+	H.underwear = null
+	H.socks = null
+	H.update_body() //update body and hair just in case
+	H.update_hair()
+	update_color()
+	var/datum/action/innate/conjure_fireball/fireball = new
+	fireball.Grant(H)
+	..()
+
+/datum/action/innate/conjure_fireball
+	name = "Conjure Fireballs"
+	check_flags = AB_CHECK_ALIVE
+	button_icon_state = "slimeswap"
+	background_icon_state = "bg_alien"
+
+/datum/action/innate/conjure_fireball/Activate()
+	var/mob/living/carbon/human/H = owner
+	if(H.get_item_by_slot(slot_l_hand) || H.get_item_by_slot(slot_r_hand))
+		H << "<span class='warning'>You need both hands free to conjure fireballs!</span>"
+		return 0
+	else
+		var/obj/item/weapon/gun/impfire/left = new
+		var/obj/item/weapon/gun/impfire/right = new
+		left.counterpart = right
+		right.counterpart = left
+		H.equip_to_slot_if_possible(left, slot_l_hand)
+		H.equip_to_slot_if_possible(right, slot_r_hand)
+		left.unlock()
+		right.unlock()
+
+/obj/item/projectile/impfireball
+	name = "fireball"
+	icon = 'icons/obj/projectiles.dmi'
+	icon_state = "fireball"
+	damage = 15
+	damage_type = BURN
+	flag = "energy"
+	range = 20
+
+	on_hit(atom/target, blocked = 0, hit_zone)
+		..()
+		explosion(target, 0,0,1,1,1,0,2,0)
+
+/obj/item/weapon/gun/impfire
+	name = "Demonic Fire"
+	desc = "Sin-stoked flames from the chasms of Hell."
+	icon = 'icons/obj/guns/projectile.dmi'
+	icon_state = "impfire"
+	item_state = "impfire"
+	w_class = 4
+	throw_speed = 2
+	throw_range = 7
+	throwforce = 30
+	force = 12
+	var/charges = 5 //potentially throw smaller fireballs for a while then maybe toss the "gun" itself for an explosive fireball?
+	var/obj/item/weapon/gun/impfire/counterpart = null //set this to the other fireball and vice versa on creation. fireball won't be usable without a counterpart.
+
+/obj/item/weapon/gun/impfire/suicide_act(mob/user)
+	var/mob/living/carbon/human/H = user
+	user.visible_message("<span class='suicide'>[user] is swallowing the [src.name]! It looks like \he's trying to commit suicide!</span>")
+	playsound(loc, 'sound/effects/blobattack.ogg', 10, 1, -3)
+	if (H && !qdeleted(H))
+		for(var/obj/item/W in H)
+			H.unEquip(W)
+			if(prob(50))
+				step(W, pick(alldirs))
+		gibs(H.loc, H.viruses, H.dna)
+	qdel(user)
+	return (FIRELOSS|BRUTELOSS)
+
+/obj/item/weapon/gun/impfire/examine(mob/user)
+	..()
+	if(charges > 1)
+		user << "[charges] fireball chargess remaining."
+	if(charges == 1)
+		user << "[charges] fireball charge remaining."
+
+/obj/item/weapon/gun/impfire/afterattack(atom/target as mob|obj|turf, mob/living/carbon/human/user as mob|obj, flag, params)
+	if(!counterpart)
+		return 0
+	shoot_fireball(target, user)
+	if(charges==0)
+		qdel(src)
+		qdel(counterpart)
+
+/obj/item/weapon/gun/impfire/proc/shoot_fireball(atom/target as mob|obj|turf, mob/living/user as mob|obj, message = 1, params, zone_override)
+	user.visible_message("<span class='danger'>[user] shoots a demonic fireball!</span>", \
+					"<span class='danger'>You shoot a demonic fireball! [src.charges] charge(s) remaining.</span>")
+	var/obj/item/projectile/impfireball/F = new /obj/item/projectile/impfireball(user.loc)
+	F.loc = user.loc
+	F.original = target
+	F.starting = user.loc
+	F.yo = target.y-user.loc.y
+	F.xo = target.x-user.loc.x
+	F.fire()
+	//message_admins("[key_name_admin(user)] shot a fireball.") //probably not necessary
+	log_game("[key_name(user)] shot a fireball.")
+	playsound(user.loc, 'sound/weapons/impfireball.ogg', 75, 1, -3)
+	charges--
+	counterpart:charges--

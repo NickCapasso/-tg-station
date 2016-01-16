@@ -25,7 +25,11 @@
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/frills, frills_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/spines, spines_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/spines_animated, animated_spines_list)
-
+	//demon bodyparts (gifts of tzeench intensify)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/spikes, spikes_list)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/claws, claws_list)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/talons, talons_list)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/sigils, sigils_list)
 
 	//Species
 	for(var/spath in subtypesof(/datum/species))

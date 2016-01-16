@@ -16,6 +16,15 @@
 	icon_state = "spacecash10"
 	desc = "It's worth 10 credits."
 
+//make it rain
+/obj/item/stack/spacecash/c10/attack_self(mob/user)
+	visible_message("<span class='notice'>[user] begins flinging his bills of spacecash into the air! What a grandiose display of wealth!</span>")
+	var/i
+	for (i=1; i<=10; i++)
+		new/obj/item/stack/spacecash(user.loc)
+	qdel(src)
+
+
 /obj/item/stack/spacecash/c20
 	icon_state = "spacecash20"
 	desc = "It's worth 20 credits."

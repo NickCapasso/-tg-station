@@ -299,6 +299,43 @@ var/list/preferences_datums = list()
 
 					dat += "</td>"
 
+			//demon shit
+				if("spikes" in pref_species.mutant_bodyparts)
+					dat += "<td valign='top' width='7%'>"
+
+					dat += "<h3>Spikes</h3>"
+
+					dat += "<a href='?_src_=prefs;preference=spikes;task=input'>[features["spikes"]]</a><BR>"
+
+					dat += "</td>"
+
+				if("claws" in pref_species.mutant_bodyparts)
+					dat += "<td valign='top' width='7%'>"
+
+					dat += "<h3>Claws</h3>"
+
+					dat += "<a href='?_src_=prefs;preference=claws;task=input'>[features["claws"]]</a><BR>"
+
+					dat += "</td>"
+
+				if("talons" in pref_species.mutant_bodyparts)
+					dat += "<td valign='top' width='7%'>"
+
+					dat += "<h3>Talons</h3>"
+
+					dat += "<a href='?_src_=prefs;preference=talons;task=input'>[features["talons"]]</a><BR>"
+
+					dat += "</td>"
+
+				if("sigils" in pref_species.mutant_bodyparts)
+					dat += "<td valign='top' width='7%'>"
+
+					dat += "<h3>Sigils</h3>"
+
+					dat += "<a href='?_src_=prefs;preference=sigils;task=input'>[features["sigils"]]</a><BR>"
+
+					dat += "</td>"
+
 			if(config.mutant_humans)
 
 				if("tail_human" in pref_species.mutant_bodyparts)
@@ -914,6 +951,30 @@ var/list/preferences_datums = list()
 					new_body_markings = input(user, "Choose your character's body markings:", "Character Preference") as null|anything in body_markings_list
 					if(new_body_markings)
 						features["body_markings"] = new_body_markings
+
+				if("spikes")
+					var/new_spikes
+					new_spikes = input(user, "Choose your character's spikes:", "Character Preference") as null|anything in spikes_list
+					if(new_spikes)
+						features["spikes"] = new_spikes
+
+				if("claws")
+					var/new_claws
+					new_claws = input(user, "Choose your character's claws:", "Character Preference") as null|anything in claws_list
+					if(new_claws)
+						features["claws"] = new_claws
+
+				if("talons")
+					var/new_talons
+					new_talons = input(user, "Choose your character's talons:", "Character Preference") as null|anything in talons_list
+					if(new_talons)
+						features["talons"] = new_talons
+
+				if("sigils")
+					var/new_sigils
+					new_sigils = input(user, "Choose your character's sigils:", "Character Preference") as null|anything in sigils_list
+					if(new_sigils)
+						features["sigils"] = new_sigils
 
 				if("s_tone")
 					var/new_s_tone = input(user, "Choose your character's skin-tone:", "Character Preference")  as null|anything in skin_tones

@@ -334,6 +334,22 @@
 		if(!H.dna.features["ears"] || H.dna.features["ears"] == "None" || H.head && (H.head.flags & BLOCKHAIR) || (H.wear_mask && (H.wear_mask.flags & BLOCKHAIR)))
 			bodyparts_to_add -= "ears"
 
+///DEMON SPIKES
+
+/* //I started on this but I don't think it's necessary because spiked imps can't wear suits anyway
+
+	if("shoulder_spikes" in mutant_bodyparts)
+		if(!H.dna.features["shoulder_spikes"] || H.dna.features["shoulder_spikes"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "shoulder_spikes"
+	if("shoulder_spikes" in mutant_bodyparts)
+		if(!H.dna.features["shoulder_spikes"] || H.dna.features["shoulder_spikes"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "shoulder_spikes"
+	if("shoulder_spikes" in mutant_bodyparts)
+		if(!H.dna.features["shoulder_spikes"] || H.dna.features["shoulder_spikes"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
+			bodyparts_to_add -= "shoulder_spikes"
+*/
+
+
 	if(!bodyparts_to_add)
 		return
 
@@ -367,6 +383,17 @@
 					S = ears_list[H.dna.features["ears"]]
 				if("body_markings")
 					S = body_markings_list[H.dna.features["body_markings"]]
+
+				//DEMON SHIT
+
+				if("spikes")
+					S = spikes_list[H.dna.features["spikes"]]
+				if("talons")
+					S = talons_list[H.dna.features["talons"]]
+				if("claws")
+					S = talons_list[H.dna.features["claws"]]
+				if("sigils")
+					S = sigils_list[H.dna.features["sigils"]]
 
 			if(!S || S.icon_state == "none")
 				continue
